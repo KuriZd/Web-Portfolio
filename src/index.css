@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  /* --gradient1: radial-gradient(circle at 50% 50%, #6b4eff, #191932, #000000);
+  background: var(--gradient1);
+  background-size: 200% 200%;
+  animation: fondoAnimado 20s ease-in-out infinite;
+
+  color: rgba(255, 255, 255, 0.87); */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  @apply text-inherit;
+}
+/* 
+@keyframes radialMove {
+  0% {
+    background-position: 30% 30%;
+  }
+  25% {
+    background-position: 70% 40%;
+  }
+  50% {
+    background-position: 50% 70%;
+  }
+  75% {
+    background-position: 20% 50%;
+  }
+  100% {
+    background-position: 30% 30%;
+  }
+}
+
+.animate-radial {
+  animation: radialMove 15s ease-in-out infinite;
+} */
