@@ -3,6 +3,7 @@ import "./App.css";
 import { FaCode, FaUser, FaGithub } from "react-icons/fa";
 import Navbar from "./Components/Navbar";
 import HeroSection from "./Components/HeroSection";
+import ProjectsSection from "./Components/ProjectsSection";
 import ShaderBackground from "./assets/ShaderBackground";
 
 function App() {
@@ -74,9 +75,7 @@ function App() {
           <h2 className="text-3xl text-white font-bold">About Me</h2>
         </section>
 
-        <section id="portfolio" className="min-h-screen px-10 py-20">
-          <h2 className="text-3xl text-white font-bold">My Work</h2>
-        </section>
+        <ProjectsSection />
 
         <section id="contact" className="min-h-screen px-10 py-20">
           <h2 className="text-3xl text-white font-bold">Contact</h2>
