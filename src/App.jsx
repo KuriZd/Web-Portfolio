@@ -5,6 +5,7 @@ import HeroSection from "./Components/HeroSection";
 import Technologies from "./Components/Technologies";
 import ProjectsSection from "./Components/ProjectsSection";
 import Dock from "./Components/Dock";
+import FooterSection from "./Components/FooterSection";
 import ShaderBackground from "./assets/ShaderBackground";
 
 function App() {
@@ -84,9 +85,7 @@ function App() {
 
         <ProjectsSection />
 
-        <section id="contact" className="min-h-screen px-10 py-20">
-          <h2 className="text-3xl text-white font-bold">Contact</h2>
-        </section>
+        <FooterSection />
       </main>
     </>
   );
