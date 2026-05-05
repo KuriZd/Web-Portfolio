@@ -1,92 +1,333 @@
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
-import { IoCodeSlash } from "react-icons/io5";
-import { createElement } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { FiArrowRight, FiMail } from "react-icons/fi";
 
-const socialLinks = [
-  { href: "https://github.com/KuriZd", label: "GitHub profile",   icon: FaGithub   },
-  { href: "#",                          label: "LinkedIn profile", icon: FaLinkedin },
-  { href: "#",                          label: "Instagram profile",icon: FaInstagram},
+const STICKERS = [
+  {
+    label: "performance",
+    color: "#FBBF24",
+    bg: "rgba(251,191,36,0.08)",
+    border: "rgba(251,191,36,0.30)",
+    glow: "0 0 20px rgba(251,191,36,0.28), 0 4px 14px rgba(0,0,0,0.3)",
+    rotate: -2,
+    pos: { top: "16%", left: "7%" },
+    float: 8,
+    delay: 0,
+    hideMobile: false,
+  },
+  {
+    label: "UI/UX",
+    color: "#C084FC",
+    bg: "rgba(192,132,252,0.08)",
+    border: "rgba(192,132,252,0.30)",
+    glow: "0 0 20px rgba(192,132,252,0.28), 0 4px 14px rgba(0,0,0,0.3)",
+    rotate: 3,
+    pos: { top: "20%", right: "8%" },
+    float: -10,
+    delay: 0.5,
+    hideMobile: false,
+  },
+  {
+    label: "accessibility",
+    color: "#34D399",
+    bg: "rgba(52,211,153,0.08)",
+    border: "rgba(52,211,153,0.30)",
+    glow: "0 0 20px rgba(52,211,153,0.28), 0 4px 14px rgba(0,0,0,0.3)",
+    rotate: -1,
+    pos: { top: "46%", left: "3%" },
+    float: 7,
+    delay: 1.0,
+    hideMobile: true,
+  },
+  {
+    label: "trends",
+    color: "#22D3EE",
+    bg: "rgba(34,211,238,0.08)",
+    border: "rgba(34,211,238,0.30)",
+    glow: "0 0 20px rgba(34,211,238,0.28), 0 4px 14px rgba(0,0,0,0.3)",
+    rotate: 2,
+    pos: { top: "44%", right: "4%" },
+    float: -6,
+    delay: 0.3,
+    hideMobile: true,
+  },
+  {
+    label: "scalability",
+    color: "#FB7185",
+    bg: "rgba(251,113,133,0.08)",
+    border: "rgba(251,113,133,0.30)",
+    glow: "0 0 20px rgba(251,113,133,0.28), 0 4px 14px rgba(0,0,0,0.3)",
+    rotate: -3,
+    pos: { bottom: "24%", left: "8%" },
+    float: 9,
+    delay: 0.7,
+    hideMobile: false,
+  },
+  {
+    label: "clean code",
+    color: "#818CF8",
+    bg: "rgba(129,140,248,0.08)",
+    border: "rgba(129,140,248,0.30)",
+    glow: "0 0 20px rgba(129,140,248,0.28), 0 4px 14px rgba(0,0,0,0.3)",
+    rotate: 1,
+    pos: { bottom: "20%", right: "7%" },
+    float: -8,
+    delay: 0.2,
+    hideMobile: false,
+  },
 ];
 
-const socialBase =
-  "p-3 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-600/30 text-slate-300 hover:text-cyan-400 hover:bg-slate-700/60 hover:border-cyan-400/30 hover:scale-110 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-1 focus:ring-offset-transparent cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center";
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 26 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function HeroSection() {
-  const scrollTo = (id) => {
+  const reducedMotion = useReducedMotion();
+
+  const scrollTo = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center px-10 text-slate-100 space-y-8">
-      {/* Main title */}
-      <h1 className="text-4xl sm:text-7xl font-extrabold text-left">
-        <span className="text-white">Frontend & Backend </span>
-        <span className="text-cyan-400 block">Developer</span>
-      </h1>
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 sm:px-12"
+    >
+      {/* Ambient glow blobs */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse, rgba(34,211,238,0.07) 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <div
+          className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse, rgba(167,139,250,0.05) 0%, transparent 70%)",
+            filter: "blur(90px)",
+          }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(ellipse, rgba(251,113,133,0.04) 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+      </div>
 
-      {/* Subtitle */}
-      <p className="text-lg sm:text-xl text-slate-400 font-medium text-left">
-        Network & CSE Student
-      </p>
-
-      {/* Description */}
-      <p className="text-lg sm:text-xl text-slate-300 max-w-xl text-left leading-relaxed">
-        Website Builder Focused on Innovation, Functionality and
-        User-Experience.
-      </p>
-
-      {/* Stack tags */}
-      <div className="flex flex-wrap gap-3">
-        {["React", "JavaScript", "Node.js", "Tailwind"].map((tech) => (
+      {/* Floating stickers */}
+      {STICKERS.map((s) => (
+        <motion.div
+          key={s.label}
+          className={s.hideMobile ? "hidden sm:block" : "block"}
+          style={{
+            position: "absolute",
+            ...s.pos,
+            rotate: `${s.rotate}deg`,
+            zIndex: 5,
+          }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.6 }}
+          animate={
+            reducedMotion
+              ? { opacity: 1, scale: 1 }
+              : { opacity: 1, scale: 1, y: [0, s.float, 0] }
+          }
+          transition={
+            reducedMotion
+              ? { duration: 0 }
+              : {
+                  opacity: { duration: 0.5, delay: s.delay + 0.9 },
+                  scale: {
+                    duration: 0.5,
+                    delay: s.delay + 0.9,
+                    ease: [0.34, 1.56, 0.64, 1],
+                  },
+                  y: {
+                    duration: 3.8 + s.delay * 0.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: s.delay + 1.2,
+                  },
+                }
+          }
+          whileHover={
+            reducedMotion
+              ? undefined
+              : { scale: 1.12, transition: { duration: 0.18 } }
+          }
+        >
           <span
-            key={tech}
-            className="px-5 py-1.5 bg-slate-800/50 text-slate-200 text-sm sm:text-base font-medium rounded-full border border-slate-600/40 backdrop-blur-sm hover:bg-slate-700/60 hover:border-cyan-400/30 hover:text-cyan-300 transition-all duration-200"
+            className="inline-block px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold select-none cursor-default backdrop-blur-sm"
+            style={{
+              color: s.color,
+              background: s.bg,
+              border: `1px solid ${s.border}`,
+              boxShadow: s.glow,
+            }}
           >
-            {tech}
+            {s.label}
           </span>
-        ))}
-      </div>
+        </motion.div>
+      ))}
 
-      {/* CTA Buttons */}
-      <div className="flex gap-4 flex-wrap">
-        {/* Primary */}
-        <button
-          onClick={() => scrollTo("contact")}
-          className="flex items-center gap-2 px-6 py-3 bg-cyan-700 hover:bg-cyan-400 text-white hover:text-slate-950 font-semibold rounded-lg shadow-lg shadow-cyan-900/40 hover:shadow-cyan-500/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-transparent cursor-pointer min-h-[44px]"
-        >
-          Contact Me
-          <MdOutlineEmail className="text-xl" aria-hidden="true" />
-        </button>
-
-        {/* Secondary */}
-        <button
-          onClick={() => scrollTo("portfolio")}
-          className="flex items-center gap-2 px-6 py-3 bg-transparent text-slate-200 font-semibold rounded-lg border border-slate-500/50 backdrop-blur-sm hover:bg-slate-800/50 hover:border-slate-400/60 hover:text-slate-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-transparent cursor-pointer min-h-[44px]"
-        >
-          Projects
-          <IoCodeSlash className="text-xl" aria-hidden="true" />
-        </button>
-      </div>
-
-      {/* Social links */}
-      <div className="flex gap-4 mt-4">
-        {socialLinks.map(({ href, label, icon: Icon }) => (
-          <a
-            key={label}
-            href={href}
-            target={href.startsWith("http") ? "_blank" : undefined}
-            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-            aria-label={label}
-            className={socialBase}
+      {/* Main content */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto"
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+      >
+        {/* Greeting pill */}
+        <motion.div variants={fadeUp} className="mb-7">
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-base font-medium text-slate-300"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.10)",
+              backdropFilter: "blur(14px)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
+            }}
           >
-            {createElement(Icon, {
-              className: "text-2xl",
-              "aria-hidden": "true",
-            })}
-          </a>
-        ))}
-      </div>
+            <span role="img" aria-label="waving hand">
+              👋
+            </span>
+            <span>
+              Hey, I'm{" "}
+              <span className="text-white font-semibold">Oscar Zamudio</span>
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Hero title */}
+        <motion.div variants={fadeUp} className="relative mb-6">
+          <div
+            className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-10"
+            style={{
+              background: "radial-gradient(ellipse, #22D3EE 0%, #A78BFA 100%)",
+            }}
+          />
+          <h1
+            className="text-5xl sm:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight leading-[1.05]"
+            style={{
+              background:
+                "linear-gradient(140deg, #ffffff 0%, #cbd5e1 45%, #22D3EE 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Full Stack
+            <br />
+            Developer
+          </h1>
+        </motion.div>
+
+        {/* Tagline */}
+        <motion.p
+          variants={fadeUp}
+          className="text-lg sm:text-2xl text-slate-400 font-medium tracking-wide mb-5"
+        >
+          Crafting both{" "}
+          <span
+            className="font-bold"
+            style={{
+              color: "#FBBF24",
+              textShadow: "0 0 18px rgba(251,191,36,0.55)",
+            }}
+          >
+            Front-end
+          </span>{" "}
+          and{" "}
+          <span
+            className="font-bold"
+            style={{
+              color: "#A78BFA",
+              textShadow: "0 0 18px rgba(167,139,250,0.55)",
+            }}
+          >
+            Back-end
+          </span>{" "}
+          solutions
+        </motion.p>
+
+        {/* Decorative divider */}
+        <motion.div
+          variants={fadeUp}
+          className="flex items-center gap-3 w-48 mb-6"
+          aria-hidden="true"
+        >
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600/70 to-transparent" />
+          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/50" />
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600/70 to-transparent" />
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          variants={fadeUp}
+          className="text-base sm:text-lg leading-8 text-slate-400 max-w-2xl mb-9"
+        >
+          Specialized in designing and building{" "}
+          <span className="text-slate-200">
+            scalable, maintainable, user-centric
+          </span>{" "}
+          web apps focused on{" "}
+          <span className="text-slate-200">
+            performance, accessibility, trends
+          </span>{" "}
+          and <span className="text-slate-200">UI/UX</span>.
+        </motion.p>
+
+        {/* CTA buttons */}
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
+          <button
+            onClick={() => scrollTo("portfolio")}
+            className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-base text-slate-950 cursor-pointer transition-all duration-200 hover:scale-[1.04] active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            style={{
+              background:
+                "linear-gradient(135deg, #22D3EE 0%, #06B6D4 55%, #0891B2 100%)",
+              boxShadow:
+                "0 0 28px rgba(34,211,238,0.32), 0 4px 16px rgba(0,0,0,0.28)",
+            }}
+          >
+            View Projects
+            <FiArrowRight
+              className="transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            />
+          </button>
+
+          <button
+            onClick={() => scrollTo("contact")}
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-base text-slate-200 cursor-pointer transition-all duration-200 hover:text-white hover:scale-[1.04] active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.13)",
+              backdropFilter: "blur(14px)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)",
+            }}
+          >
+            <FiMail aria-hidden="true" />
+            Contact Me
+          </button>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

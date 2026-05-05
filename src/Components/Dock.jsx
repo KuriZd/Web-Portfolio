@@ -6,19 +6,14 @@ import {
   SiSpotify,
   SiInstagram,
 } from "react-icons/si";
-import {
-  RiHomeLine,
-  RiUser3Line,
-  RiBriefcaseLine,
-  RiMailLine,
-} from "react-icons/ri";
+import { TbSmartHome, TbBraces, TbApps, TbSend2 } from "react-icons/tb";
 
 /* ── Navigation items ─────────────────────────────────────────────────────── */
 const NAV_ITEMS = [
-  { id: "home", label: "Home", icon: RiHomeLine },
-  { id: "about", label: "Tech", icon: RiUser3Line },
-  { id: "portfolio", label: "Projects", icon: RiBriefcaseLine },
-  { id: "contact", label: "Contact", icon: RiMailLine },
+  { id: "home", label: "Home", icon: TbSmartHome },
+  { id: "about", label: "Tech", icon: TbBraces },
+  { id: "portfolio", label: "Projects", icon: TbApps },
+  { id: "contact", label: "Contact", icon: TbSend2 },
 ];
 
 /* ── Social icons ─────────────────────────────────────────────────────────── */
@@ -34,7 +29,7 @@ const SOCIAL_ICONS = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/in/kurizd/",
     icon: SiLinkedin,
     color: "#0A66C2",
     glow: "rgba(10,102,194,0.55)",
@@ -42,7 +37,7 @@ const SOCIAL_ICONS = [
   {
     id: "gitlab",
     label: "GitLab",
-    href: "#",
+    href: "https://gitlab.com/KuriZd",
     icon: SiGitlab,
     color: "#FC6D26",
     glow: "rgba(252,109,38,0.55)",
@@ -50,7 +45,7 @@ const SOCIAL_ICONS = [
   {
     id: "spotify",
     label: "Spotify",
-    href: "#",
+    href: "https://open.spotify.com/playlist/2QlPacXuSxOyXNs7ikzV8w?si=8166ddbd44564891",
     icon: SiSpotify,
     color: "#1DB954",
     glow: "rgba(29,185,84,0.55)",
@@ -58,7 +53,7 @@ const SOCIAL_ICONS = [
   {
     id: "instagram",
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/kurizd_/",
     icon: SiInstagram,
     color: "#E1306C",
     glow: "rgba(225,48,108,0.55)",
