@@ -9,7 +9,7 @@ const MotionDiv = motion.div;
 const MotionH2 = motion.h2;
 const MotionP = motion.p;
 
-export default function ProjectModal({ project, onClose, reducedMotion }) {
+export default function ProjectModal({ project, layoutPrefix = "", onClose, reducedMotion }) {
   useEffect(() => {
     if (!project) return;
 
@@ -40,7 +40,7 @@ export default function ProjectModal({ project, onClose, reducedMotion }) {
           }}
         >
           <MotionArticle
-            layoutId={`project-card-${project.id}`}
+            layoutId={`${layoutPrefix}project-card-${project.id}`}
             className="relative my-auto w-full max-w-5xl overflow-hidden rounded-[2rem] border border-slate-600/40 bg-slate-950 shadow-2xl shadow-cyan-950/30"
             role="dialog"
             aria-modal="true"
@@ -57,20 +57,20 @@ export default function ProjectModal({ project, onClose, reducedMotion }) {
               <FiX className="text-xl" aria-hidden="true" />
             </button>
 
-            <ProjectVisual project={project} />
+            <ProjectVisual project={project} layoutPrefix={layoutPrefix} />
 
             <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.35fr_0.65fr] lg:p-10">
               <div className="space-y-6">
                 <div>
                   <MotionP
-                    layoutId={`project-category-${project.id}`}
+                    layoutId={`${layoutPrefix}project-category-${project.id}`}
                     className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-300/80"
                   >
                     {project.category}
                   </MotionP>
                   <MotionH2
                     id={`project-modal-title-${project.id}`}
-                    layoutId={`project-title-${project.id}`}
+                    layoutId={`${layoutPrefix}project-title-${project.id}`}
                     className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl"
                   >
                     {project.title}
@@ -78,7 +78,7 @@ export default function ProjectModal({ project, onClose, reducedMotion }) {
                 </div>
 
                 <MotionP
-                  layoutId={`project-description-${project.id}`}
+                  layoutId={`${layoutPrefix}project-description-${project.id}`}
                   className="text-base leading-8 text-slate-300"
                 >
                   {project.description}
@@ -125,22 +125,36 @@ export default function ProjectModal({ project, onClose, reducedMotion }) {
                 </div>
 
                 <div className="grid gap-3">
-                  <a
-                    href={project.demoUrl}
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:bg-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
-                  >
-                    Live Demo
-                    <FiExternalLink aria-hidden="true" />
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-600/60 bg-slate-900/70 px-5 py-3 text-sm font-bold text-slate-100 transition-all duration-200 hover:border-cyan-300/50 hover:text-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
-                  >
-                    GitHub
-                    <FiGithub aria-hidden="true" />
-                  </a>
+                  {project.demoUrl ? (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:bg-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+                    >
+                      Live Demo
+                      <FiExternalLink aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-700/70 px-5 py-3 text-sm font-bold text-slate-400">
+                      Demo unavailable
+                    </span>
+                  )}
+                  {project.githubUrl ? (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-600/60 bg-slate-900/70 px-5 py-3 text-sm font-bold text-slate-100 transition-all duration-200 hover:border-cyan-300/50 hover:text-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                    >
+                      GitHub
+                      <FiGithub aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/50 px-5 py-3 text-sm font-bold text-slate-500">
+                      GitHub unavailable
+                    </span>
+                  )}
                 </div>
               </aside>
             </div>

@@ -7,10 +7,10 @@ const MotionDiv = motion.div;
 const MotionH3 = motion.h3;
 const MotionP = motion.p;
 
-function ProjectVisual({ project, compact = false }) {
+function ProjectVisual({ project, compact = false, layoutPrefix = "" }) {
   return (
     <MotionDiv
-      layoutId={`project-image-${project.id}`}
+      layoutId={`${layoutPrefix}project-image-${project.id}`}
       className={`relative overflow-hidden rounded-2xl border border-white/10 ${project.visual.grid} ${
         compact ? "h-48" : "h-72 sm:h-96"
       }`}
@@ -40,33 +40,33 @@ function ProjectVisual({ project, compact = false }) {
 
 export { ProjectVisual };
 
-export default function ProjectCard({ project, onSelect, reducedMotion }) {
+export default function ProjectCard({ project, onSelect, reducedMotion, layoutPrefix = "" }) {
   return (
     <MotionArticle
-      layoutId={`project-card-${project.id}`}
+      layoutId={`${layoutPrefix}project-card-${project.id}`}
       className="group cursor-pointer overflow-hidden rounded-3xl border border-slate-700/50 bg-slate-950/72 p-3 shadow-2xl shadow-black/30 backdrop-blur-md"
       whileHover={reducedMotion ? undefined : { y: -8, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 260, damping: 28 }}
-      onClick={() => onSelect(project)}
+      onClick={() => onSelect(project, layoutPrefix)}
     >
       <button
         type="button"
         className="block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-2xl cursor-pointer"
         aria-label={`Open ${project.title} project details`}
       >
-        <ProjectVisual project={project} compact />
+        <ProjectVisual project={project} compact layoutPrefix={layoutPrefix} />
 
         <div className="space-y-4 px-2 pb-3 pt-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <MotionP
-                layoutId={`project-category-${project.id}`}
+                layoutId={`${layoutPrefix}project-category-${project.id}`}
                 className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-300/80"
               >
                 {project.category}
               </MotionP>
               <MotionH3
-                layoutId={`project-title-${project.id}`}
+                layoutId={`${layoutPrefix}project-title-${project.id}`}
                 className="mt-2 text-2xl font-bold tracking-tight text-white"
               >
                 {project.title}
@@ -78,7 +78,7 @@ export default function ProjectCard({ project, onSelect, reducedMotion }) {
           </div>
 
           <MotionP
-            layoutId={`project-description-${project.id}`}
+            layoutId={`${layoutPrefix}project-description-${project.id}`}
             className="text-sm leading-6 text-slate-400"
           >
             {project.shortDescription}
