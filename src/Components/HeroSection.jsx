@@ -97,10 +97,7 @@ export default function HeroSection() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 sm:px-12"
-    >
+    <div className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-6 pt-16 pb-8 sm:px-12 sm:pt-18">
       {/* Ambient glow blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
@@ -186,7 +183,7 @@ export default function HeroSection() {
 
       {/* Main content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto"
+        className="relative z-10 flex -translate-y-3 flex-col items-center text-center max-w-3xl mx-auto sm:-translate-y-2"
         variants={stagger}
         initial="hidden"
         animate="show"
@@ -328,6 +325,6 @@ export default function HeroSection() {
           </button>
         </motion.div>
       </motion.div>
-    </section>
+    </div>
   );
 }

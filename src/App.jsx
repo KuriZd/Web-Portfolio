@@ -75,7 +75,7 @@ function App() {
       <main id="main-content">
         <ShaderBackground />
 
-        <section id="home" className="min-h-screen flex flex-col justify-center snap-start pt-20">
+        <section id="home" className="snap-start">
           <HeroSection />
         </section>
 
