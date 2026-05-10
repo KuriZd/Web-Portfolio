@@ -72,14 +72,14 @@ function App() {
       <Dock />
 
       {/* Main content */}
-      <main id="main-content" className="pt-20">
+      <main id="main-content">
         <ShaderBackground />
 
-        <section id="home">
+        <section id="home" className="min-h-screen flex flex-col justify-center snap-start pt-20">
           <HeroSection />
         </section>
 
-        <section id="about">
+        <section id="about" className="min-h-screen flex flex-col justify-center snap-start">
           <Technologies />
         </section>
 
