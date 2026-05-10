@@ -173,6 +173,7 @@ const QUICK_LINKS = [
 
 /* ─── Sub-components ─────────────────────────────────────────────────────── */
 
+// eslint-disable-next-line no-unused-vars
 function FooterSocialIcon({ icon: Icon, label, href, color }) {
   const [hov, setHov] = useState(false);
   return (
@@ -198,6 +199,7 @@ function FooterSocialIcon({ icon: Icon, label, href, color }) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 function SocialCircle({ icon: Icon, label, href, color, glow }) {
   const [hov, setHov] = useState(false);
   return (
@@ -328,6 +330,7 @@ export default function FooterSection() {
             </p>
             <ul className="space-y-3 text-slate-300">
               {PERSONAL_INFO.map(
+                // eslint-disable-next-line no-unused-vars
                 ({ icon: Icon, label, value, href, external }) => (
                   <li key={label} className="flex items-center gap-3">
                     <Icon
@@ -442,6 +445,7 @@ export default function FooterSection() {
                   {[
                     { icon: RiMoonLine, val: true, label: "Dark" },
                     { icon: RiSunLine, val: false, label: "Light" },
+                  // eslint-disable-next-line no-unused-vars
                   ].map(({ icon: Icon, val, label }) => (
                     <button
                       key={label}

@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger } from "../lib/gsapSetup";
 import {
   SiHtml5, SiCss3, SiJavascript, SiTypescript, SiReact,
   SiNextdotjs, SiNodedotjs, SiExpress, SiNestjs, SiPhp,
@@ -158,8 +160,33 @@ function MarqueeRow({ items, direction = "left", duration = 38 }) {
 
 /* ── Section ──────────────────────────────────────────────────────────────── */
 export default function Technologies() {
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduced) return;
+
+      gsap.from(".tech-header-item", {
+        opacity: 0,
+        y: 24,
+        duration: 0.65,
+        stagger: 0.1,
+        ease: "power3.out",
+        clearProps: "opacity,transform",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 78%",
+          once: true,
+        },
+      });
+    },
+    { scope: sectionRef, dependencies: [] }
+  );
+
   return (
     <section
+      ref={sectionRef}
       className="w-full py-24 overflow-hidden"
       style={{
         backgroundImage:
@@ -169,15 +196,15 @@ export default function Technologies() {
     >
       {/* Header */}
       <div className="text-center mb-14 px-6 space-y-5">
-        <p className="text-xs font-bold tracking-[0.3em] text-slate-500 uppercase">
+        <p className="tech-header-item text-xs font-bold tracking-[0.3em] text-slate-500 uppercase">
           What I Work With
         </p>
 
-        <h2 className="text-5xl sm:text-7xl font-extrabold text-white tracking-tight">
+        <h2 className="tech-header-item text-5xl sm:text-7xl font-extrabold text-white tracking-tight">
           My Tech Stack
         </h2>
 
-        <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        <p className="tech-header-item text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
           From{" "}
           <span className="text-yellow-400 font-semibold">fast frontends</span>
           {" "}to{" "}
@@ -189,12 +216,12 @@ export default function Technologies() {
           {" "}products.
         </p>
 
-        <p className="text-xs text-slate-600 tracking-wide">
+        <p className="tech-header-item text-xs text-slate-600 tracking-wide">
           Hover to pause · drag to explore
         </p>
       </div>
 
-      {/* Carousels */}
+      {/* Carousels — unchanged */}
       <div className="space-y-4">
         <MarqueeRow items={ROW_1} direction="left"  duration={40} />
         <MarqueeRow items={ROW_2} direction="right" duration={34} />

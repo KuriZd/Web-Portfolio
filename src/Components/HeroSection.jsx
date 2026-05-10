@@ -1,5 +1,10 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { motion, useReducedMotion } from "motion/react";
-import { FiArrowRight, FiMail } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
+import { gsap } from "../lib/gsapSetup";
+
+const MotionSticker = motion.div;
 
 const STICKERS = [
   {
@@ -27,7 +32,7 @@ const STICKERS = [
     hideMobile: false,
   },
   {
-    label: "accessibility",
+    label: "Accessibility",
     color: "#34D399",
     bg: "rgba(52,211,153,0.08)",
     border: "rgba(52,211,153,0.30)",
@@ -39,7 +44,7 @@ const STICKERS = [
     hideMobile: true,
   },
   {
-    label: "trends",
+    label: "Trends",
     color: "#22D3EE",
     bg: "rgba(34,211,238,0.08)",
     border: "rgba(34,211,238,0.30)",
@@ -51,7 +56,7 @@ const STICKERS = [
     hideMobile: true,
   },
   {
-    label: "scalability",
+    label: "Scalability",
     color: "#FB7185",
     bg: "rgba(251,113,133,0.08)",
     border: "rgba(251,113,133,0.30)",
@@ -63,7 +68,7 @@ const STICKERS = [
     hideMobile: false,
   },
   {
-    label: "clean code",
+    label: "Clean Code",
     color: "#818CF8",
     bg: "rgba(129,140,248,0.08)",
     border: "rgba(129,140,248,0.30)",
@@ -76,22 +81,25 @@ const STICKERS = [
   },
 ];
 
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 26 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
 export default function HeroSection() {
   const reducedMotion = useReducedMotion();
+  const contentRef = useRef(null);
+
+  useGSAP(
+    () => {
+      if (reducedMotion) return;
+
+      gsap.timeline({ delay: 0.15 }).from(".hero-item", {
+        opacity: 0,
+        y: 28,
+        duration: 0.7,
+        stagger: 0.11,
+        ease: "power3.out",
+        clearProps: "opacity,transform",
+      });
+    },
+    { scope: contentRef, dependencies: [] },
+  );
 
   const scrollTo = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -126,9 +134,9 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Floating stickers */}
+      {/* Floating stickers — kept in motion/react for the infinite y keyframe */}
       {STICKERS.map((s) => (
-        <motion.div
+        <MotionSticker
           key={s.label}
           className={s.hideMobile ? "hidden sm:block" : "block"}
           style={{
@@ -178,18 +186,16 @@ export default function HeroSection() {
           >
             {s.label}
           </span>
-        </motion.div>
+        </MotionSticker>
       ))}
 
-      {/* Main content */}
-      <motion.div
+      {/* Main content — GSAP timeline animates .hero-item children with stagger */}
+      <div
+        ref={contentRef}
         className="relative z-10 flex -translate-y-3 flex-col items-center text-center max-w-3xl mx-auto sm:-translate-y-2"
-        variants={stagger}
-        initial="hidden"
-        animate="show"
       >
         {/* Greeting pill */}
-        <motion.div variants={fadeUp} className="mb-7">
+        <div className="hero-item mb-7">
           <div
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-base font-medium text-slate-300"
             style={{
@@ -207,10 +213,10 @@ export default function HeroSection() {
               <span className="text-white font-semibold">Oscar Zamudio</span>
             </span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Hero title */}
-        <motion.div variants={fadeUp} className="relative mb-6">
+        <div className="hero-item relative mb-6">
           <div
             className="absolute inset-0 -z-10 rounded-full blur-3xl opacity-10"
             style={{
@@ -231,13 +237,10 @@ export default function HeroSection() {
             <br />
             Developer
           </h1>
-        </motion.div>
+        </div>
 
         {/* Tagline */}
-        <motion.p
-          variants={fadeUp}
-          className="text-lg sm:text-2xl text-slate-400 font-medium tracking-wide mb-5"
-        >
+        <p className="hero-item text-lg sm:text-2xl text-slate-400 font-medium tracking-wide mb-5">
           Crafting both{" "}
           <span
             className="font-bold"
@@ -259,24 +262,20 @@ export default function HeroSection() {
             Back-end
           </span>{" "}
           solutions
-        </motion.p>
+        </p>
 
         {/* Decorative divider */}
-        <motion.div
-          variants={fadeUp}
-          className="flex items-center gap-3 w-48 mb-6"
+        <div
+          className="hero-item flex items-center gap-3 w-48 mb-6"
           aria-hidden="true"
         >
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600/70 to-transparent" />
           <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/50" />
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600/70 to-transparent" />
-        </motion.div>
+        </div>
 
         {/* Description */}
-        <motion.p
-          variants={fadeUp}
-          className="text-base sm:text-lg leading-8 text-slate-400 max-w-2xl mb-9"
-        >
+        <p className="hero-item text-base sm:text-lg leading-8 text-slate-400 max-w-2xl mb-9">
           Specialized in designing and building{" "}
           <span className="text-slate-200">
             scalable, maintainable, user-centric
@@ -286,45 +285,50 @@ export default function HeroSection() {
             performance, accessibility, trends
           </span>{" "}
           and <span className="text-slate-200">UI/UX</span>.
-        </motion.p>
+        </p>
 
-        {/* CTA buttons */}
-        <motion.div
-          variants={fadeUp}
-          className="flex flex-wrap items-center justify-center gap-4"
-        >
+        {/* CTA */}
+        <div className="hero-item">
           <button
             onClick={() => scrollTo("portfolio")}
-            className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-base text-slate-950 cursor-pointer transition-all duration-200 hover:scale-[1.04] active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-2xl font-semibold text-base text-white cursor-pointer overflow-hidden active:scale-[0.97] transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             style={{
               background:
-                "linear-gradient(135deg, #22D3EE 0%, #06B6D4 55%, #0891B2 100%)",
+                "linear-gradient(135deg, rgba(34,211,238,0.11) 0%, rgba(8,145,178,0.07) 100%)",
+              border: "1px solid rgba(34,211,238,0.40)",
+              backdropFilter: "blur(16px)",
               boxShadow:
-                "0 0 28px rgba(34,211,238,0.32), 0 4px 16px rgba(0,0,0,0.28)",
+                "0 0 36px rgba(34,211,238,0.18), 0 0 80px rgba(34,211,238,0.06), inset 0 1px 0 rgba(255,255,255,0.09)",
             }}
           >
+            {/* Shine sweep on hover */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-[650ms] ease-in-out"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.10) 50%, transparent 100%)",
+              }}
+            />
+            {/* Cyan pulse dot */}
+            <span
+              aria-hidden="true"
+              className="flex-shrink-0 w-2 h-2 rounded-full"
+              style={{
+                background: "#22D3EE",
+                boxShadow:
+                  "0 0 6px rgba(34,211,238,1), 0 0 14px rgba(34,211,238,0.6)",
+              }}
+            />
             View Projects
             <FiArrowRight
-              className="transition-transform duration-200 group-hover:translate-x-1"
+              className="transition-transform duration-200 group-hover:translate-x-1.5"
+              style={{ color: "#67e8f9" }}
               aria-hidden="true"
             />
           </button>
-
-          <button
-            onClick={() => scrollTo("contact")}
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-base text-slate-200 cursor-pointer transition-all duration-200 hover:text-white hover:scale-[1.04] active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.13)",
-              backdropFilter: "blur(14px)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)",
-            }}
-          >
-            <FiMail aria-hidden="true" />
-            Contact Me
-          </button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }
