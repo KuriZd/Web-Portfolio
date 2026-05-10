@@ -107,7 +107,7 @@ export const projects = [
       "Fondo visual dinámico con shaders usando Three.js",
     ],
     role: "Diseño visual, desarrollo frontend, animaciones, estructura de componentes y optimización de experiencia de usuario.",
-    demoUrl: "https://kurizd.vercel.app",
+    demoUrl: "https://kuri-zd-p.vercel.app/",
     githubUrl: "https://github.com/KuriZd/Web-Portfolio",
     visual: {
       accent: "from-cyan-300 via-indigo-400 to-purple-500",

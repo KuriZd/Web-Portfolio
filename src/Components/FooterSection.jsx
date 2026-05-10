@@ -71,8 +71,8 @@ const PERSONAL_INFO = [
   {
     icon: RiGlobalLine,
     label: "Website",
-    value: "kurizd.vercel.app",
-    href: "https://kurizd.vercel.app",
+    value: "kuri-zd-p.vercel.app",
+    href: "https://kuri-zd-p.vercel.app",
     external: true,
   },
   {
@@ -508,7 +508,7 @@ export default function FooterSection() {
 
               {/* Bento card */}
               <a
-                href="https://kurizd.vercel.app"
+                href="https://kuri-zd-p.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl

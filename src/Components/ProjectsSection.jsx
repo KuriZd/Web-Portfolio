@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LayoutGroup, motion, useReducedMotion } from "motion/react";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiLayers } from "react-icons/fi";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import { projects } from "./projectsData";
@@ -160,56 +160,70 @@ export default function ProjectsSection() {
       className="relative min-h-screen overflow-hidden px-5 py-24 sm:px-8 lg:px-10"
     >
       <div className="absolute inset-0 -z-10 bg-[#05070d]" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_12%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(180deg,rgba(15,23,42,0.1),rgba(2,6,23,0.92))]" />
-      <div className="absolute inset-0 -z-10 opacity-35 bg-[linear-gradient(rgba(148,163,184,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.055)_1px,transparent_1px)] bg-[size:56px_56px]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_10%,rgba(34,211,238,0.20),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(168,85,247,0.16),transparent_30%),radial-gradient(circle_at_50%_92%,rgba(14,165,233,0.12),transparent_38%),linear-gradient(180deg,rgba(15,23,42,0.12),rgba(2,6,23,0.94))]" />
+      <div className="absolute inset-0 -z-10 opacity-30 bg-[linear-gradient(rgba(148,163,184,0.052)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.052)_1px,transparent_1px)] bg-[size:56px_56px]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-cyan-300/10 to-transparent" />
 
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 max-w-3xl">
-          <MotionP
-            className="text-xs font-bold uppercase tracking-[0.32em] text-cyan-300/80"
-            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
-            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
-            transition={{ duration: 0.45 }}
-          >
-            My Work
-          </MotionP>
-          <MotionH2
-            className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-6xl"
-            initial={reducedMotion ? false : { opacity: 0, y: 18 }}
-            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-          >
-            Featured Projects
-          </MotionH2>
-          <MotionP
-            className="mt-5 text-base leading-8 text-slate-400 sm:text-lg"
-            initial={reducedMotion ? false : { opacity: 0, y: 18 }}
-            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Selected builds with clean interfaces, practical architecture, and
-            motion that keeps the experience fast and intentional.
-          </MotionP>
+          <div className="max-w-3xl">
+            <MotionP
+              className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/[0.08] px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-cyan-200/90 shadow-[0_0_24px_rgba(34,211,238,0.08)]"
+              initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.45 }}
+            >
+              <FiLayers aria-hidden="true" />
+              My Work
+            </MotionP>
+            <MotionH2
+              className="mt-5 max-w-2xl text-4xl font-extrabold tracking-tight text-white sm:text-6xl"
+              initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+            >
+              Featured Projects
+            </MotionH2>
+            <MotionP
+              className="mt-5 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg"
+              initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Selected builds with clean interfaces, practical architecture, and
+              motion that keeps the experience fast and intentional.
+            </MotionP>
+          </div>
         </div>
 
         <LayoutGroup>
-          <div className="relative">
-            <div ref={trackRef} className="py-3" style={{ overflowX: "clip" }}>
+          <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.025] p-2 shadow-[0_24px_90px_rgba(0,0,0,0.34)] backdrop-blur-[2px] sm:p-4">
+            <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/[0.06] via-transparent to-cyan-300/[0.035]" />
+            <div
+              ref={trackRef}
+              className="relative py-3"
+              style={{ overflowX: "clip" }}
+            >
               <motion.div
                 className="flex cursor-grab active:cursor-grabbing"
                 style={{ gap: GAP, touchAction: "none" }}
                 animate={{ x: reducedMotion ? 0 : translateX }}
                 transition={
                   animEnabled && !reducedMotion
-                    ? { type: "spring", stiffness: 260, damping: 32 }
+                    ? {
+                        type: "spring",
+                        stiffness: 170,
+                        damping: 24,
+                        mass: 0.75,
+                      }
                     : { duration: 0 }
                 }
                 drag={animEnabled ? "x" : false}
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.18}
+                dragElastic={0.28}
                 dragMomentum={false}
                 onDragEnd={handleDragEnd}
               >
@@ -235,7 +249,7 @@ export default function ProjectsSection() {
             <button
               onClick={prev}
               aria-label="Previous projects"
-              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-slate-600/50 bg-slate-900/80 text-slate-300 backdrop-blur-md transition-all duration-200 hover:border-cyan-300/60 hover:text-cyan-200 sm:-left-5"
+              className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/[0.12] bg-slate-950/78 text-slate-300 shadow-xl shadow-black/30 backdrop-blur-md transition-all duration-200 hover:border-cyan-300/60 hover:bg-slate-900/90 hover:text-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:-left-5"
             >
               <FiChevronLeft size={20} />
             </button>
@@ -243,7 +257,7 @@ export default function ProjectsSection() {
             <button
               onClick={next}
               aria-label="Next projects"
-              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-slate-600/50 bg-slate-900/80 text-slate-300 backdrop-blur-md transition-all duration-200 hover:border-cyan-300/60 hover:text-cyan-200 sm:-right-5"
+              className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/[0.12] bg-slate-950/78 text-slate-300 shadow-xl shadow-black/30 backdrop-blur-md transition-all duration-200 hover:border-cyan-300/60 hover:bg-slate-900/90 hover:text-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:-right-5"
             >
               <FiChevronRight size={20} />
             </button>
