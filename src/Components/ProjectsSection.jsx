@@ -157,7 +157,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="portfolio"
-      className="relative min-h-screen overflow-hidden px-5 py-24 sm:px-8 lg:px-10"
+      className="relative min-h-screen overflow-hidden px-5 py-10 sm:px-8 lg:px-10"
     >
       <div className="absolute inset-0 -z-10 bg-[#05070d]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_10%,rgba(34,211,238,0.20),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(168,85,247,0.16),transparent_30%),radial-gradient(circle_at_50%_92%,rgba(14,165,233,0.12),transparent_38%),linear-gradient(180deg,rgba(15,23,42,0.12),rgba(2,6,23,0.94))]" />

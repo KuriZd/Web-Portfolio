@@ -242,7 +242,7 @@ export default function FooterSection() {
       {/* ── About Me ──────────────────────────────────────────────────────── */}
       <div
         ref={aboutRef}
-        className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 pt-24 pb-16"
+        className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 pt-10 pb-16"
       >
         {/* Title + line */}
         <div
