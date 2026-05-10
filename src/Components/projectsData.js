@@ -1,8 +1,16 @@
+import rentitImage from "../assets/projects/rentit-app.png";
+import multimodalImage from "../assets/projects/multimodal-tutor-system.png";
+import damiansPosImage from "../assets/projects/damians-pos-desktop.png";
+import aboutMeImage from "../assets/projects/about-me-android.jpg";
+import webPortfolioImage from "../assets/projects/web-portfolio.png";
+import techaniImage from "../assets/projects/techani.png";
+
 export const projects = [
   {
     id: "rentit-app",
     title: "RentIt App",
     category: "Mobile App",
+    image: rentitImage,
     shortDescription:
       "Aplicación móvil para publicar, rentar y calificar artículos dentro de un ecosistema colaborativo.",
     description:
@@ -26,6 +34,7 @@ export const projects = [
     id: "multimodal-tutor-system",
     title: "Multimodal Tutor’s System",
     category: "Full-stack App",
+    image: multimodalImage,
     shortDescription:
       "Sistema web para gestión de tutorías académicas, tutorados, asistencias, reportes y seguimiento estudiantil.",
     description:
@@ -49,6 +58,7 @@ export const projects = [
     id: "damians-pos-desktop",
     title: "Damian’s POS Desktop",
     category: "Desktop App",
+    image: damiansPosImage,
     shortDescription:
       "Sistema POS de escritorio con ventas, productos, servicios, inventario, usuarios y sincronización con Supabase.",
     description:
@@ -72,6 +82,7 @@ export const projects = [
     id: "about-me-android",
     title: "About Me Android",
     category: "Android App",
+    image: aboutMeImage,
     shortDescription:
       "Portafolio móvil nativo en Android con perfil profesional, habilidades, proyectos, contacto e integración con Spotify.",
     description:
@@ -95,6 +106,7 @@ export const projects = [
     id: "web-portfolio",
     title: "Web Portfolio",
     category: "Creative Website",
+    image: webPortfolioImage,
     shortDescription:
       "Portafolio web personal con secciones profesionales, animaciones, proyectos destacados y experiencia visual moderna.",
     description:
@@ -118,6 +130,7 @@ export const projects = [
     id: "techani",
     title: "Techani 2",
     category: "HealthTech Platform",
+    image: techaniImage,
     shortDescription:
       "Sistema de gestión, registro y seguimiento para pacientes con diabetes tipo 1.",
     description:

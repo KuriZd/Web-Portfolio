@@ -22,23 +22,35 @@ function ProjectVisual({ project, compact = false, layoutPrefix = "" }) {
       <div className="absolute left-5 top-5 inline-flex items-center rounded-full border border-white/[0.12] bg-slate-950/45 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md">
         {project.category}
       </div>
-      <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/10 bg-slate-950/62 p-4 shadow-2xl shadow-black/40 backdrop-blur-md">
-        <div className="mb-4 flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+
+      {project.image ? (
+        <div className="absolute inset-x-5 bottom-5 top-14 flex items-center justify-center rounded-2xl border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/40 backdrop-blur-md">
+          <img
+            src={project.image}
+            alt={`${project.title} preview`}
+            className="max-h-full max-w-full rounded-xl object-contain drop-shadow-[0_20px_32px_rgba(0,0,0,0.45)]"
+            loading="lazy"
+          />
         </div>
-        <div className="space-y-3">
-          <div className={`h-3 rounded-full bg-gradient-to-r ${project.visual.accent} ${compact ? "w-7/12" : "w-5/12"}`} />
-          <div className="grid grid-cols-3 gap-2">
-            <div className="h-12 rounded-xl bg-white/10" />
-            <div className="h-12 rounded-xl bg-white/10" />
-            <div className="h-12 rounded-xl bg-white/10" />
+      ) : (
+        <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/10 bg-slate-950/62 p-4 shadow-2xl shadow-black/40 backdrop-blur-md">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
           </div>
-          <div className="h-2 rounded-full bg-white/14" />
-          <div className="h-2 w-8/12 rounded-full bg-white/10" />
+          <div className="space-y-3">
+            <div className={`h-3 rounded-full bg-gradient-to-r ${project.visual.accent} ${compact ? "w-7/12" : "w-5/12"}`} />
+            <div className="grid grid-cols-3 gap-2">
+              <div className="h-12 rounded-xl bg-white/10" />
+              <div className="h-12 rounded-xl bg-white/10" />
+              <div className="h-12 rounded-xl bg-white/10" />
+            </div>
+            <div className="h-2 rounded-full bg-white/14" />
+            <div className="h-2 w-8/12 rounded-full bg-white/10" />
+          </div>
         </div>
-      </div>
+      )}
     </MotionDiv>
   );
 }
